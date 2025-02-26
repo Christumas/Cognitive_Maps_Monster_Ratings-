@@ -227,11 +227,11 @@ class questionnaireBlock{
         this.surveyQuestions = null;
         this.likertQuestions = [];
         this.likertScale = [
-            "1 \n Did not understand task",
+            "1 \n Strongly Disagree",
             "2",
             "3",
             "4",
-            "5 \n Understood the task"
+            "5 \n Strongly Agree"
         ]   
     }
 
@@ -250,9 +250,14 @@ class questionnaireBlock{
     //method to create our questionnaire 
     generateSurveytext(){
         let questions = [
-            {prompt: 'How well did you understand the structure of the task?', required:true},
-            {prompt: 'In the second block, would you have any other ways of sorting the monsters?', required:true},
-            {prompt: 'In the first block, what criteria did you personally use to choose a monster?', required:true}
+            {prompt: 'How well did you understand the structure of the task?', required:true, name:'taskStructure'},
+            {prompt: 'Which task is your favorite, and which one did you like the least? Could you share your reasons?', name:'favouriteTask', rows:5},
+            {prompt: 'In the second block, would you have any other ways of sorting the monsters?', required:true, name:'sortingMethod'},
+            {prompt: 'In the first block, what criteria did you personally use to choose a monster?', required:true, name :'othercriteria'},
+            {prompt: '<p>Reflecting on the tasks you completed, what do you believe was being tested or examined in this experiment? </p><p>Were there any aspects of the experiment that made you think about its underlying purpose?',
+                 required:true, name :'purpose'},
+            {prompt: 'Any comments or suggestions for the experiment that you would like us to know?', name: 'comments',rows: 5}
+
         ];
         
         //make the survey object
@@ -271,8 +276,8 @@ class questionnaireBlock{
 
     generateLikert(){
         let questions = [
-            {prompt: 'How well did you understand the structure of the entire task?', labels: this.likertScale},
-            {prompt: 'How well did you understand the structure of the first block?', labels: this.likertScale}
+            {prompt: 'I liked the monster choice task.', labels: this.likertScale},
+            {prompt: 'I liked the monster sorting task.', labels: this.likertScale}
         ]
 
         //making our likert object
