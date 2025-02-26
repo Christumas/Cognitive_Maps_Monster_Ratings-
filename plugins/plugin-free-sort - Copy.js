@@ -270,9 +270,10 @@ var jsPsychFreeSort = (function (jspsych) {
           );
         } else {
           //code i added
+          //ensures free movement of the stimuli
           var coords = {
-            x: -trial.stim_width - 100, // Position to the left of the arena (10px margin from the left edge)
-            y: 10 + i * (trial.stim_height * -0.15) // Stack vertically (with space between them)
+            x: -trial.stim_width - 100, //Position to the left of the arena (10px margin from the left edge)
+            y: 10 + i * (trial.stim_height * -0.15) //Stack vertically (with space between them)
         }
         }
         display_element.querySelector("#jspsych-free-sort-arena").innerHTML += '<img src="' + stimuli[i] + '" data-src="' + stimuli[i] + '" class="jspsych-free-sort-draggable" draggable="false" id="jspsych-free-sort-draggable-' + i + '" style="position: absolute; cursor: move; width:' + trial.stim_width + "px; height:" + trial.stim_height + "px; top:" + (coords.y + trial.sort_area_height*0.1) + "px; left:" + coords.x + 'px;"></img>';
