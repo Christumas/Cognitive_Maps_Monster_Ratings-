@@ -216,14 +216,14 @@ var jsPsychFreeSort = (function (jspsych) {
       if (trial.border_width == null) {
         border_width = trial.sort_area_height * 0.03;
       }
-      let html = '<div id="jspsych-free-sort-arena" class="jspsych-free-sort-arena" style="position: relative; width:' + trial.sort_area_width + "px; height:" + trial.sort_area_height + 'px; margin: auto; border: 5px solid black; overflow: visible;"</div>';
+      let html = '<div id="jspsych-free-sort-arena" class="jspsych-free-sort-arena" style="position: relative; width:' + trial.sort_area_width + "px; height:" + trial.sort_area_height + 'px; margin: auto; overflow: visible;"</div>';
       html += '<div id="jspsych-free-sort-border" class="jspsych-free-sort-border" style="position: relative; width:' + trial.sort_area_width * 0.94 + "px; height:" + trial.sort_area_height * 0.94 + "px; border:" + border_width + "px solid " + border_color_out + "; margin: auto; line-height: 0em; ";
       if (trial.sort_area_shape == "ellipse") {
         html += 'webkit-border-radius: 50%; moz-border-radius: 50%; border-radius: 50%"></div>';
       } else {
         html += 'webkit-border-radius: 0%; moz-border-radius: 0%; border-radius: 0%"></div>';
       }
-      const html_text = '<div style="line-height: 1.0em; border: solid 5px green; text-align:center; width:100%;">' + trial.prompt + '<p id="jspsych-free-sort-counter" style="display: inline-block; ">' + get_counter_text(stimuli.length) + "</p></div>";
+      const html_text = '<div style="line-height: 1.0em; text-align:center; width:100%;">' + trial.prompt + '<p id="jspsych-free-sort-counter" style="display: inline-block; ">' + get_counter_text(stimuli.length) + "</p></div>";
       if (trial.prompt_location == "below") {
         html += html_text;
       } else {

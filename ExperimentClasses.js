@@ -153,24 +153,24 @@ class Experiment {
                 stimulus:`
                 <!-- Here We control the entire layout of the stimuli -->
 <!--This will be the parent container which holds all our stimuli>
-<div class="StimuliContainer" style=" display:flex; border:5px solid green; flex-direction:column; align-items:center; gap:20px; padding:20px; width: 900px; height: 700px;">
+<div class="StimuliContainer" style=" display:flex; flex-direction:column; align-items:center; gap:20px; padding:20px; width: 900px; height: 700px;">
 
     <!--Text Container-->
-    <div class="TextContainer" style=" text-align:center; border:5px solid yellow; height: 50px;">
+    <div class="TextContainer" style=" text-align:center; height: 50px;">
         <p>Pick your favourite Monster!</p>
         <p>Press LEFT or RIGHT arrow key to choose.</p>
     </div>
 
     <!--Image Container will contain the two containers for both left and right image-->
-    <div class="ImageContainer" style=" display:flex; border:5px solid blue; flex-direction:row; align-items:center; justify-content: center; gap: 50px; width: 100%; height: 500px;">
+    <div class="ImageContainer" style=" display:flex;  flex-direction:row; align-items:center; justify-content: center; gap: 50px; width: 100%; height: 500px;">
 
         <!--Left image container-->
-        <div class="leftContainer" style=" display:flex; border:5px solid pink; justify-content: center; align-items:center; width: 400px; height: 400px;">
+        <div class="leftContainer" style=" display:flex; justify-content: center; align-items:center; width: 400px; height: 400px;">
             <img id="leftImage" src="monsters/${LeftStim}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
         </div>
 
         <!--Right image container -->
-        <div class="rightContainer" style="display:flex; border:5px solid red; justify-content: center; align-items:center; width: 400px; height: 400px;">
+        <div class="rightContainer" style="display:flex; justify-content: center; align-items:center; width: 400px; height: 400px;">
             <img id="rightImage" src="monsters/${RightStim}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
         </div>
 
