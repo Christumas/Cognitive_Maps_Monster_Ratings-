@@ -24,6 +24,7 @@ class Screen{
         };
     }
 
+    //method to go into fullscreen. All screen objects will have this method
     goFullScreen(){
         let message = '<p>The experiment will proceed in fullscreen. </p>'
 
@@ -58,7 +59,7 @@ class Screen{
 }
 
 
-
+//Instructions Class for the instructions screen
 class Instructions extends Screen{
     constructor(pages,navigation = true){
         super();
@@ -77,6 +78,7 @@ class Instructions extends Screen{
         };
     }
 }
+
 
 
 //Experiment class to have everything loaded before the experiment starts and ensures a smooth run
@@ -276,8 +278,8 @@ class questionnaireBlock{
 
     generateLikert(){
         let questions = [
-            {prompt: 'I liked the monster choice task.', labels: this.likertScale},
-            {prompt: 'I liked the monster sorting task.', labels: this.likertScale}
+            {prompt: 'I liked the monster choice task.', labels: this.likertScale, required:true, name:'choice_task_rating'},
+            {prompt: 'I liked the monster sorting task.', labels: this.likertScale, required:true, name:'sort_task_rating'}
         ]
 
         //making our likert object
