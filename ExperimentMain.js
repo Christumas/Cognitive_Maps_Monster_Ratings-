@@ -30,7 +30,9 @@ async function StartExperiment(){
     timeline.push(InstructionsBlock1.toJsPsychObject());
     //timeline.push(FirstBlockTrials);
     timeline.push(PostBlockScreen.toJsPsychObject());
-    timeline.push(SecondBlockTrials);
+    //timeline.push(SecondBlockTrials);
+    timeline.push(Questionnaires.displayQScreen());
+
     timeline.push(EndScreen.toJsPsychObject());
 
     jsPsych.run(timeline)
@@ -57,14 +59,20 @@ const instructions = [`<p>Welcome to the instructions.</p>`,
     `<p> Proceed to the first block when you are ready! Good luck! </p>`]
 const InstructionsBlock1 = new Instructions(instructions);
 
+
 //Post First Block Screen
 const PostBlockMessage = `<p>You've completed the first block. Thanks for Playing!</p>
 <p> Press SPACE to continue to the second block when you are ready!.</p>`
 const PostBlockScreen = new Screen(PostBlockMessage,choices = [' '])
 
 
-const EndScreenMessage = `<p>You've completed the second block. You have completed the game!</p>
-<p>Thank you for playing! Have a nice day!</p>
+//Questionnaire Block
+const Questionnaires = new questionnaireBlock();
+
+
+//End Screen
+const EndScreenMessage = `<p>You've have completed the game!</p>
+<p>Thank you for playing! </p>
 <p>Press SPACE to exit the game!</p>`
 const EndScreen = new Screen(EndScreenMessage, choices=[' ']);
 

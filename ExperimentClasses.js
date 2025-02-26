@@ -184,9 +184,40 @@ class Experiment {
         return trials;
 
     }
-
 }
 
 
+//Questionnaire Class to control the type of questions displayed at the end of the block
+class questionnaireBlock{
+    constructor(){
+        this.surveyQuestions = [];
+        this.likertQuestions = [];
+        this.type = null;
+        this.likertScale = [
+            "1 \n Did not understand task",
+            "2",
+            "3",
+            "4",
+            "5 \n Understood the task"
+        ]   
+    }
+
+    //create a screen to pop up questionnaire from our Screen class
+    displayQScreen(){
+        let message= `<p>You've completed the Second Block!</p>
+        <p>In the next few screens you'll be shown a few questionnaires. Please answer truthfully.</p>
+        <p>Press SPACE to continue.</p>`
+        const QScreen = new Screen(message, choices = [' ']);
+        
+        return QScreen.toJsPsychObject() 
+
+
+    }
+
+    generateSurveytext(){
+
+    }
+
+}
 
 
