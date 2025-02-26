@@ -38,7 +38,6 @@ async function StartExperiment(){
     timeline.push(Questionnaires.displayQScreen()); // Our post second block screen leading into the questionnaires
     timeline.push(Questionnaires.generateSurveytext());
     timeline.push(Questionnaires.generateLikert())
-
     timeline.push(EndScreen.toJsPsychObject());
     timeline.push(EndScreen.exitFullScreen());
 
@@ -81,10 +80,16 @@ const Questionnaires = new questionnaireBlock();
 const EndScreenMessage = `<p>You've have completed the game!</p>
 <p>Thank you for playing! </p>
 <p>Press SPACE to exit the game!</p>`
-const EndScreen = new Screen(EndScreenMessage, choices=[' ']);
+const EndScreen = new Screen(EndScreenMessage, choices=[' '],
+    callback = () => {
+        jsPsych.data.get().localSave('csv','data.csv')
+        }
+);
 
 
 
 
 StartExperiment();
+
+   
 

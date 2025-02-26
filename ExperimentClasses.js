@@ -7,10 +7,11 @@
 
 // Parent class for all our screen objects (Welcome, Pre-start, First Block)
 class Screen{
-    constructor(stimulus, choices = null){
+    constructor(stimulus, choices = null, callback=null){
         this.type = jsPsychHtmlKeyboardResponse;
         this.stimulus = stimulus;
         this.choices = choices;
+        this.callback = callback;
 
     }
 
@@ -21,6 +22,7 @@ class Screen{
             type : this.type,
             stimulus : this.stimulus,
             choices :this.choices,
+            on_finish: this.callback
         };
     }
 
@@ -182,8 +184,15 @@ class Experiment {
 `,
                 choices: ["arrowleft", "arrowright"],
                 post_trial_gap : 800,
+                data: {leftstim: LeftStim,
+                    rightstim : RightStim
+                    
+                },
+
                 on_finish: (data) => {
-                    console.log(data.response); //just as a debugging step to see which key is pressed
+                    console.log(data.response);
+                    console.log(data.leftstim)
+                    console.log(data.rightstim) //just as a debugging step to see which key is pressed
 
                 }
                 
