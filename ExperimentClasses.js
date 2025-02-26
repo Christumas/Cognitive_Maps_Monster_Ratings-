@@ -190,9 +190,8 @@ class Experiment {
 //Questionnaire Class to control the type of questions displayed at the end of the block
 class questionnaireBlock{
     constructor(){
-        this.surveyQuestions = [];
+        this.surveyQuestions = null;
         this.likertQuestions = [];
-        this.type = null;
         this.likertScale = [
             "1 \n Did not understand task",
             "2",
@@ -209,13 +208,51 @@ class questionnaireBlock{
         <p>Press SPACE to continue.</p>`
         const QScreen = new Screen(message, choices = [' ']);
         
-        return QScreen.toJsPsychObject() 
+        return QScreen.toJsPsychObject() //using the method from our screen class
 
 
     }
-
+    
+    //method to create our questionnaire 
     generateSurveytext(){
+        let questions = [
+            {prompt: 'How well did you understand the structure of the task?', required:true},
+            {prompt: 'In the second block, would you have any other ways of sorting the monsters?', required:true},
+            {prompt: 'In the first block, what criteria did you personally use to choose a monster?', required:true}
+        ];
+        
+        //make the survey object
+        this.type = jsPsychSurveyText; //changing the questionnaire object type so our Jspsych object inherits this 
+        this.surveyQuestions = questions;
+        
+        let survey = {
+            type : this.type,
+            questions: this.surveyQuestions
 
+        };
+
+        return survey;
+
+    }
+
+    generateLikert(){
+        let questions = [
+            {prompt: 'How well did you understand the structure of the entire task?', labels: this.likertScale},
+            {prompt: 'How well did you understand the structure of the first block?', labels: this.likertScale}
+        ]
+
+        //making our likert object
+        this.type = jsPsychSurveyLikert;
+        this.questions = questions;
+
+
+        let likertSurvey = {
+            type: this.type,
+            questions: this.questions
+            
+        }
+
+        return likertSurvey;
     }
 
 }

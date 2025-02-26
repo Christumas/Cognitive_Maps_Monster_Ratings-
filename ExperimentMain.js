@@ -31,14 +31,18 @@ async function StartExperiment(){
     //timeline.push(FirstBlockTrials);
     timeline.push(PostBlockScreen.toJsPsychObject());
     //timeline.push(SecondBlockTrials);
-    timeline.push(Questionnaires.displayQScreen());
+
+    //Pushing all our questionnaire class related objects into the timeline
+    timeline.push(Questionnaires.displayQScreen()); // Our post second block screen leading into the questionnaires
+    timeline.push(Questionnaires.generateSurveytext());
+    timeline.push(Questionnaires.generateLikert())
 
     timeline.push(EndScreen.toJsPsychObject());
 
     jsPsych.run(timeline)
 }
 
-//Creating our screen objects for the experiment
+//Creating our objects for the experiment from their respective classes
 
 //Welcome screen
 var welcomeMessage = `<p> Welcome to the Experiment</p>
