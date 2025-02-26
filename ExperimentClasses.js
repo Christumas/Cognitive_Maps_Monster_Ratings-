@@ -23,7 +23,41 @@ class Screen{
             choices :this.choices,
         };
     }
+
+    goFullScreen(){
+        let message = '<p>The experiment will proceed in fullscreen. </p>'
+
+        this.type = jsPsychFullscreen;
+        this.stimulus = message;
+
+        let fullscreen = {
+            type : this.type,
+            stimulus: this.stimulus,
+            fullscreen_mode: true
+            
+        }
+        
+        return fullscreen;
+    }
+
+    exitFullScreen(){
+        let message = '<p> Exiting fullscreen now.</p>'
+
+        this.type = jsPsychFullscreen;
+        this.stimulus = message;
+
+        let exitfullscreen = {
+            type: this.type,
+            stimulus: this.stimulus,
+            fullscreen_mode: false
+        }
+
+        return exitfullscreen;
+        
+    }
 }
+
+
 
 class Instructions extends Screen{
     constructor(pages,navigation = true){
