@@ -211,7 +211,9 @@ class Experiment {
         //should generate an extra trial 
         let criteria = ["Colour", "Size", "Emotions", "Cuteness", "Shape"];
     
-        let trials = criteria.map( dimension => {
+        let trials = criteria
+        .sort( () => Math.random() - 0.5) //shuffle the criteria so each participant starts with a different trial
+        .map( dimension => {
             return {
                 type : jsPsychFreeSort,
                 stimuli: this.stimuli,
