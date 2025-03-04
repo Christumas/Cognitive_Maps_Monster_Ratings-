@@ -188,6 +188,7 @@ class Experiment {
                     rightstim : RightStim
                     
                 },
+                save_trial_parameters: {LeftStim, RightStim},
 
                 on_finish: (data) => {
                     console.log(data.response);
@@ -210,7 +211,6 @@ class Experiment {
         //should generate an extra trial 
         let criteria = ["Colour", "Size", "Emotions", "Cuteness", "Shape"];
     
-
         let trials = criteria.map( dimension => {
             return {
                 type : jsPsychFreeSort,
@@ -222,7 +222,14 @@ class Experiment {
                 stim_starts_inside : false,
                 prompt_location : "below",
                 scale_factor : 1,
-                column_spread_factor : 0.01
+                column_spread_factor : 0.01,
+                data: {
+                    sort_criteria : dimension
+                },
+                save_trial_parameters : dimension,
+                on_finish: (data) =>{
+                    console.log(data.sort_criteria);
+                }
             }
         });
 
