@@ -269,14 +269,16 @@ class questionnaireBlock{
     
     //method to create our questionnaire 
     generateSurveytext(){
+        let rows = 5;
+        let columns = 100;
         let questions = [
-            {prompt: 'How well did you understand the structure of the task?', required:true, name:'taskStructure'},
-            {prompt: 'Which task is your favorite, and which one did you like the least? Could you share your reasons?', name:'favouriteTask', rows:5},
-            {prompt: 'In the second block, would you have any other ways of sorting the monsters?', required:true, name:'sortingMethod'},
-            {prompt: 'In the first block, what criteria did you personally use to choose a monster?', required:true, name :'othercriteria'},
+            {prompt: 'How did you find the task instructions? Do you have any suggestions for any improvements', required:true, name:'TaskInstructions', rows: rows, columns: columns},
+            {prompt: 'Which task is your favorite, and which one did you like the least? Could you share your reasons?', name:'favouriteTask', rows:rows,  columns: columns},
+            {prompt: 'In the second block, would you have any other ways of sorting the monsters?', required:true, name:'sortingMethod', rows: rows,  columns: columns},
+            {prompt: 'In the first block, what criteria did you personally use to choose a monster?', required:true, name :'othercriteria', rows:rows,  columns: columns},
             {prompt: '<p>Reflecting on the tasks you completed, what do you believe was being tested or examined in this experiment? </p><p>Were there any aspects of the experiment that made you think about its underlying purpose?',
-                 required:true, name :'purpose'},
-            {prompt: 'Any comments or suggestions for the experiment that you would like us to know?', name: 'comments',rows: 5}
+                 required:true, name :'purpose', rows:rows,  columns: columns},
+            {prompt: 'Any comments or suggestions for the experiment that you would like us to know?', name: 'comments',rows: rows,  columns: columns}
 
         ];
         

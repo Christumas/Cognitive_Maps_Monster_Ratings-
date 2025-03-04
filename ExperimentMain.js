@@ -32,12 +32,12 @@ async function StartExperiment(){
     timeline.push(InstructionsBlock1.toJsPsychObject());
     //timeline.push(FirstBlockTrials);
     timeline.push(PostBlockScreen.toJsPsychObject());
-    //timeline.push(SecondBlockTrials);
+    timeline.push(SecondBlockTrials);
 
     //Pushing all our questionnaire class related objects into the timeline
     //timeline.push(Questionnaires.displayQScreen()); // Our post second block screen leading into the questionnaires
     //timeline.push(Questionnaires.generateSurveytext());
-    timeline.push(Questionnaires.generateLikert())
+    //timeline.push(Questionnaires.generateLikert())
     timeline.push(EndScreen.toJsPsychObject());
     timeline.push(EndScreen.exitFullScreen());
 
