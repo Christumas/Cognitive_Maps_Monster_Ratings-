@@ -235,7 +235,33 @@ class Experiment {
             }
         });
 
+        //the last sorting trial based off how the participants liked the monster
+        trials.push({
+            type : jsPsychFreeSort,
+                stimuli: this.stimuli,
+                prompt: `<p>Please sort the monsters based on how much you <b>personally like them</b>. </p>`,
+                sort_area_shape: 'square',
+                sort_area_height: 115,
+                sort_area_width: 900,
+                stim_starts_inside : false,
+                prompt_location : "below",
+                scale_factor : 1,
+                column_spread_factor : 0.01,
+                data: {
+                    sort_criteria : "Personal preference"
+                },
+                save_trial_parameters : "Personal preference",
+                on_finish: (data) =>{
+                    console.log(data.sort_criteria);
+                }
+        })
+
+
+
+
         return trials;
+
+
 
     }
 }
