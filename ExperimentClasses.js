@@ -295,14 +295,23 @@ class questionnaireBlock{
     }
 
     generateLikert(){
-        let questions = [
-            {prompt: 'I liked the monster choice task.', labels: this.likertScale, required:true, name:'choice_task_rating'},
-            {prompt: 'I liked the monster sorting task.', labels: this.likertScale, required:true, name:'sort_task_rating'}
-        ]
+
+        let criteria = ["Colour", "Size", "Emotions", "Cuteness", "Shape"];
+
+        let LikertQuestions = criteria.map( (dimension) =>{
+            return{
+                prompt: `I found it easy to sort the monsters according to <b>${dimension}</b>.`, 
+                labels: this.likertScale, 
+                required:true, 
+                name: `${dimension}+_likertquestion `,
+            }
+        });
+
+        
 
         //making our likert object
         this.type = jsPsychSurveyLikert;
-        this.questions = questions;
+        this.questions = LikertQuestions;
 
 
         let likertSurvey = {
