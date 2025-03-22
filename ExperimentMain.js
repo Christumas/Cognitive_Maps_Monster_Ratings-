@@ -1,23 +1,33 @@
 //Jatos onload wrapper so that everything works with Jatos 
 jatos.onLoad(function () {
-    //Define Paths for your experiment Data
-
-
+    //Define Paths for your essential experiment files
     const MonstersPath = "C:/JS Psych Experiments/Monster Ratings/monsters"
-    let DesignFilePath = "/DesignFiles"; 
-    
-    let prolificID = jatos.urlQueryParameters.PROLIFIC_PID; //get the participant's prolific ID to grab a design file
-    console.log(prolificID)
+    let DesignFileList = "/DesignFiles/designfiles.json"; //this contains all the names of .csv design files
+    let designFolder = "/DesignFiles"
 
 
-    function getDesignFile(ppID, designFolder){
-        Math.seedrandom(ppID);
 
-        let index = Math.floor(Math.random() * designFolder.length)
-        console.log(index)
+    async function getDesignFile(){
+        try{
+            let response = await fetch(DesignFileList);
+            let designs = await response.json();
+           
+            const prolificID = jatos.urlQueryParameters.PROLIFIC_PID; //get the participant's prolific ID to grab a design file
+            console.log(prolificID)
+
+            Math.seedrandom(prolificID);
+
+            let index = Math.floor(Math.random() * designs.length)
+            console.log(index)
+
+            return designFolder + "/" + designs[index]; //returns the fullpath of the file
+
+        }
         
-        return designFolder[index];
-
+        catch(error){
+            console.error("Error loading design files",error);
+        }
+        
     }
     
     //create our JsPsych and timeline to ensure the experiment runs
@@ -29,7 +39,7 @@ jatos.onLoad(function () {
     let DesignFile = getDesignFile(prolificID,DesignFilePath);
     
     //Create our Experiment object which will handle loading up our stimuli, designfile and game blocks
-    const MonstersExperiment = new Experiment(MonstersPath, DesignFilePath);
+    const MonstersExperiment = new Experiment(MonstersPath, DesignFile);
     
     //This is asychronous function that will ensure that our Experiment object (pre)loads up the
     //design files, stimuli and trials for the first and second blocks before the experiment starts.
@@ -101,10 +111,10 @@ jatos.onLoad(function () {
     const EndScreenMessage = `<p>You've have completed the game!</p>
     <p>Thank you for playing! </p>
     <p>Press SPACE to exit the game!</p>`
-    const EndScreen = new Screen(EndScreenMessage, choices=[' '],
-        callback = () => {
-            jsPsych.data.get().localSave('csv','data.csv')
-            }
+    const EndScreen = new Screen(EndScreenMessage, choices=[' ']
+        // callback = () => {
+        //     jsPsych.data.get().localSave('csv','data.csv')
+        //     }
     );
     
     
