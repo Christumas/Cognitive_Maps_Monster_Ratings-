@@ -1,7 +1,7 @@
 //Jatos onload wrapper so that everything works with Jatos 
 jatos.onLoad(function () {
     //Define Paths for your essential experiment files
-    const MonstersPath = "C:/JS Psych Experiments/Monster Ratings/monsters"
+    const MonstersPath = "/monsters"
     let DesignFileList = "/DesignFiles/designfiles.json"; //this contains all the names of .csv design files
     let designFolder = "/DesignFiles"
 
@@ -35,20 +35,22 @@ jatos.onLoad(function () {
         override_safe_mode : true
     });
     const timeline = [];
-    
-    let DesignFile = getDesignFile(prolificID,DesignFilePath);
-    
-    //Create our Experiment object which will handle loading up our stimuli, designfile and game blocks
-    const MonstersExperiment = new Experiment(MonstersPath, DesignFile);
-    
+            
     //This is asychronous function that will ensure that our Experiment object (pre)loads up the
     //design files, stimuli and trials for the first and second blocks before the experiment starts.
     //Once everything is loaded, in this function we define the flow of the experiment by pushing
     //the objects(screens etc.) we created (see below) into the timeline.  
     async function StartExperiment(){
+        let DesignFile = await getDesignFile();
+        console.log(DesignFile);
+
+        //Create our Experiment object which will handle loading up our stimuli, designfile and game blocks
+        const MonstersExperiment = new Experiment(MonstersPath, DesignFile);
+
         await MonstersExperiment.loadStimuli();
         console.log("Stimuli Loaded", MonstersExperiment.stimuli);
         console.log(jatos.studyAssetsUrl); 
+
         await MonstersExperiment.loadDesignFile();
         console.log("Design File", MonstersExperiment.designData);
     
@@ -111,10 +113,14 @@ jatos.onLoad(function () {
     const EndScreenMessage = `<p>You've have completed the game!</p>
     <p>Thank you for playing! </p>
     <p>Press SPACE to exit the game!</p>`
-    const EndScreen = new Screen(EndScreenMessage, choices=[' ']
-        // callback = () => {
-        //     jsPsych.data.get().localSave('csv','data.csv')
-        //     }
+    const EndScreen = new Screen(EndScreenMessage, choices=[' '],
+        callback = () => {
+            jsPsych.data.get().csv();
+            jatos.submitResultData(experimentData, () => {
+                console.log("Data successfully saved!")
+                jatos.endStudy();
+            })
+            }
     );
     
     
