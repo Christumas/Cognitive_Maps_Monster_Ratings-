@@ -1,14 +1,17 @@
 //Jatos onload wrapper so that everything works with Jatos 
 jatos.onLoad(function () {
     //Define Paths for your essential experiment files
-    const MonstersPath = "/monsters"
-    let DesignFileList = "/DesignFiles/designfiles.json"; //this contains all the names of .csv design files
-    let designFolder = "/DesignFiles"
+    const MonstersPath = "monsters"
+    let DesignFileList = "DesignFiles/designfiles.json"; //this contains all the names of .csv design files
+    let designFolder = "DesignFiles"
 
+    chosenDesignFile = null; //placeholder to record the design file assigned to the participant
 
 
     async function getDesignFile(){
         try{
+            console.log(typeof jatos)
+            console.log(jatos.studyAssetsRoot);
             let response = await fetch(DesignFileList);
             let designs = await response.json();
            
@@ -20,8 +23,10 @@ jatos.onLoad(function () {
             let index = Math.floor(Math.random() * designs.length)
             console.log(index)
 
-            return designFolder + "/" + designs[index]; //returns the fullpath of the file
+            chosenDesignFile = designs[index];
+            let selectedDesignFile = designFolder + "/" + designs[index];
 
+            return selectedDesignFile; //returns the fullpath of the file
         }
         
         catch(error){
@@ -73,7 +78,10 @@ jatos.onLoad(function () {
         timeline.push(Questionnaires.generateLikert())
         timeline.push(EndScreen.toJsPsychObject());
         timeline.push(EndScreen.exitFullScreen());
-    
+        
+        jsPsych.data.addProperties({
+            design_file : chosenDesignFile
+        }) //manually adding the designfile name to our final results
         jsPsych.run(timeline)
     }
     
@@ -115,11 +123,11 @@ jatos.onLoad(function () {
     <p>Press SPACE to exit the game!</p>`
     const EndScreen = new Screen(EndScreenMessage, choices=[' '],
         callback = () => {
-            jsPsych.data.get().csv();
-            jatos.submitResultData(experimentData, () => {
-                console.log("Data successfully saved!")
-                jatos.endStudy();
-            })
+            experimentData =jsPsych.data.get().csv();
+            jatos.appendResultData(experimentData);
+            console.log("Jatos appended data")
+            jatos.endStudy()
+            console.log("Jatos ended study");
             }
     );
     

@@ -183,17 +183,16 @@ class Experiment {
 </div>
 `,
                 choices: ["arrowleft", "arrowright"],
-                post_trial_gap : 800,
+                post_trial_gap : 900,
                 data: {leftstim: LeftStim,
                     rightstim : RightStim
                     
                 },
-                save_trial_parameters: {LeftStim, RightStim},
-
                 on_finish: (data) => {
                     console.log(data.response);
                     console.log(data.leftstim)
                     console.log(data.rightstim) //just as a debugging step to see which key is pressed
+                    delete data.stimulus; //this is to remove the field of stimulus because the entire html code gets saved in the data savefile
 
                 }
                 
